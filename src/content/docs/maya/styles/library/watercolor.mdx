@@ -1,0 +1,87 @@
+---
+title: "Watercolor shader style"
+sidebar:
+  label: "Watercolor"
+  order: 2
+---
+import { Content as EffectBloom } from '../../../../../partials/maya/effects/bloom.md';
+import { Content as EffectGapsOverlapsWatercolor } from '../../../../../partials/maya/effects/gaps-overlaps-watercolor.md';
+import { Content as EffectPigmentApplicationWatercolor } from '../../../../../partials/maya/effects/pigment-application-watercolor.md';
+import { Content as EffectPostProcessing } from '../../../../../partials/maya/effects/post-processing.md';
+
+<figure>
+<img src="/media/maya/styles/library/watercolor/header.jpg" alt="Watercolor render" />
+</figure>
+
+[Back to Watercolor Features](https://artineering.io/styles/watercolor
+)
+
+## Style breakdown
+
+The watercolor shader style emulates traditional watercolor animation in 3D, providing art-directed control over most characteristic effects including color-bleeding, pigment turbulence, edge darkening and more.
+
+This shader style depends on the [Flair material](/maya/materials/flair-shader), which can be assigned onto any mesh object. The material embeds painterly reflectance models and supports the art-direction framework of Flair. The framework allows to fully control the watercolor shader effects at each level of control, from the entire image using sliders to individual vertices.
+
+The style is based on the [award-winning PhD research](https://artineering.io/publications/real-time-watercolor-rendering-of-3d-objects-and-animation-with-enhanced-control) of our founder, but each effect has been continously improved for production. While production-proven, the watercoolor shader style may not have all features that you need. So please let us know if [we can help](https://artineering.io/agency) polish the look exactly to your requirements and pipeline.
+
+In this page, we only document global attributes specific to the watercolor shader style. To learn more about other global attributes, please see the [globals node documentation](/maya/getting-started/globals).
+
+## Attribute breakdown
+
+<figure class="aio-ui">
+<img src="/media/maya/styles/library/watercolor/style-attrs.png" alt="Style attributes" />
+<figcaption>Style attributes in the globals node</figcaption>
+</figure>
+
+---
+
+<EffectBloom />
+
+---
+
+### Ambient Occlusion
+
+See [Ambient Occlusion](/effects/ambient-occlusion/) for its attributes.
+
+---
+
+### Atmospheric Effects
+
+See [Atmospheric Effects](/effects/atmosphere/) for its attributes.
+
+---
+
+## Watercolor
+
+### Pigment
+
+See [Pigment](/effects/pigment/) for its attributes.
+
+---
+
+### Edge Darkening
+
+See [Edge Darkening](/effects/edge-darkening/) for its attributes.
+
+---
+
+### Bleeding
+
+See [Bleeding](/effects/bleeding/) for its attributes.
+
+---
+
+<EffectPigmentApplicationWatercolor />
+
+---
+
+<EffectGapsOverlapsWatercolor />
+
+---
+
+<EffectPostProcessing />
+
+---
+
+## Art-directable Attributes
+Attributes labeled as art-directable can be controlled further with [NoiseFX](/tools/noisefx/), [VertexFX](/maya/art-direction/vertexfx/) and [proxy materials](/maya/materials/proxy-material/).

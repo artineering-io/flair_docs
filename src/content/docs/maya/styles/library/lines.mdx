@@ -1,0 +1,112 @@
+---
+title: "Lines shader style"
+sidebar:
+  label: "Lines"
+  order: 7
+---
+import { Content as EffectPigmentApplicationWatercolor } from '../../../../../partials/maya/effects/pigment-application-watercolor.md';
+import { Content as EffectToonLines } from '../../../../../partials/maya/effects/toon-lines.md';
+
+<figure>
+<img src="/media/maya/styles/library/lines/lines_header.jpg" alt="Lines header" />
+</figure>
+
+
+[Back to Lines Features](https://artineering.io/styles/lines
+)
+
+## Style breakdown
+
+The lines shader style is all about generating lines for all kinds of linework to outline the form of 3D geometry. From clean toon lines to the more rough sketch lines, you can control and art-direct them to match your artwork. The shader style also provides other painterly effects often found using traditional painting media such as pigment turbulence, canvas granulation and dry-brush.
+
+<figure>
+<video autoplay loop muted playsinline>
+<source src="/media/maya/lines_web.mp4" type="video/mp4" />
+</video>
+<figcaption>3D model and animation by Adrian Cojocaru</figcaption>
+</figure>
+
+The lines in this shader style are generated from three different types of data: color, normals and depth. So, whenever there is a high enough difference between neighboring pixels of the specific data type, a line is generated. This line is then dilated to become wider or narrower and offset from its original position in the case of rough sketch lines.
+
+This shader style depends on the [Flair material](/maya/materials/flair-shader), which can be assigned onto any mesh object. The material embeds painterly reflectance models and supports the art-direction framework of Flair. The material also contains an	`Animated` setting attribute, which allows to attach rough sketch line offsets to animated objects.
+
+The lines shader style may not have all features that you need. So please let us know if [we can help](https://artineering.io/agency) polish the look exactly to your requirements and pipeline.
+
+---
+
+## Tutorials
+
+<div class="d-flex flex-justify-around">
+
+<figure class="video-embed">
+<iframe src="https://www.youtube.com/embed/videoseries?si=kyQSf-WSCExdRzL2&amp;list=PLqQsRmdLB8t_h71jiVsGcv669-eu4YNXT" title="Tutorial Series - All about Toon Lines in Flair for Maya" allowfullscreen loading="lazy"></iframe>
+<figcaption>Tutorial Series - All about Toon Lines in Flair for Maya</figcaption>
+</figure>
+
+<figure class="video-embed">
+<iframe src="https://www.youtube.com/embed/videoseries?si=kyQSf-WSCExdRzL2&amp;list=PLqQsRmdLB8t_-ZEP29BQKavbcvX_HtqwX" title="Tutorial Series - All about Sketch Lines in Flair for Maya" allowfullscreen loading="lazy"></iframe>
+<figcaption>Tutorial Series - All about Sketch Lines in Flair for Maya</figcaption>
+</figure>
+
+</div>
+
+---
+
+## Attribute breakdown
+
+In this section, we only document global attributes specific toon and sketch lines shader style. To learn more about other global attributes, please refer to the [globals node documentation](/maya/getting-started/globals).
+
+<figure class="aio-ui">
+<img src="/media/maya/styles/library/lines/style-attrs.png" alt="Style attributes" />
+<figcaption>Style attributes in the configuration node</figcaption>
+</figure>
+
+---
+
+### Ambient Occlusion
+
+See [Ambient Occlusion](/effects/ambient-occlusion/) for its attributes.
+
+---
+
+### Atmospheric Effects
+
+See [Atmospheric Effects](/effects/atmosphere/) for its attributes.
+
+---
+
+### Lines
+
+See [Lines](/effects/lines/) for its attributes.
+
+---
+
+<EffectToonLines />
+
+---
+
+### Rough Lines
+
+See [Rough Lines](/effects/sketch-lines/) for its attributes.
+
+---
+
+### Advanced Line Controls
+
+See [Advanced Line Controls](/effects/lines/#advanced-controls) for its attributes.
+
+---
+### Others
+
+### Pigment
+
+See [Pigment](/effects/pigment/) for its attributes.
+
+---
+
+<EffectPigmentApplicationWatercolor />
+
+---
+
+## Art-directable Attributes
+Attributes labeled as art-directable can be controlled further with [NoiseFX](/tools/noisefx/), [VertexFX](/maya/art-direction/vertexfx/) and [proxy materials](/maya/materials/proxy-material/).

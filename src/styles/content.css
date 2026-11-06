@@ -1,0 +1,223 @@
+/* Content classes used by pages migrated from the old docs site (docs.artineering.io). */
+
+.sl-markdown-content figure {
+	margin-inline: auto;
+}
+.sl-markdown-content figure img,
+.sl-markdown-content figure video {
+	display: block;
+	margin-inline: auto;
+	max-width: 100%;
+	height: auto;
+}
+.sl-markdown-content figcaption {
+	font-size: var(--sl-text-sm);
+	font-style: italic;
+	text-align: center;
+	color: var(--sl-color-gray-3);
+}
+.sl-markdown-content figure.aio-ui img,
+.sl-markdown-content figure.aio-ui-highres img {
+	border-radius: 5px;
+}
+.sl-markdown-content figure.aio-ui-highres img {
+	width: 65%;
+}
+.sl-markdown-content figure.aio-window img {
+	box-shadow: 0 4px 20px -5px rgb(0 0 0 / 0.5);
+}
+.sl-markdown-content figure.aio-ui-mac img {
+	border-radius: 30px;
+}
+
+/* Side-by-side figures and videos. */
+.sl-markdown-content .d-flex {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 1rem;
+	justify-content: space-around;
+}
+.sl-markdown-content .d-flex > * {
+	flex: 1 1 280px;
+	margin-top: 0;
+}
+.sl-markdown-content .d-flex.bottom {
+	align-items: flex-end;
+}
+
+@media (min-width: 50rem) {
+	.sl-markdown-content .float-right {
+		float: right;
+		margin-inline-start: 1rem;
+	}
+	.sl-markdown-content .float-left {
+		float: left;
+		margin-inline-end: 1rem;
+	}
+}
+
+.sl-markdown-content .video-embed iframe {
+	width: 100%;
+	aspect-ratio: 16 / 9;
+	border: 0;
+}
+
+.sl-markdown-content .release-log video {
+	max-height: 300px;
+}
+
+/* "New in Flair 1.2" and "Art-directable" markers next to headings. */
+.sl-markdown-content .new-label,
+.sl-markdown-content .pill-link {
+	display: inline-block;
+	padding: 0.1em 0.6em;
+	border-radius: 1em;
+	font-size: var(--sl-text-xs);
+	text-transform: uppercase;
+	text-decoration: none;
+}
+.sl-markdown-content .new-label {
+	background-color: var(--sl-color-green-low);
+	color: var(--sl-color-green-high);
+}
+.sl-markdown-content .pill-link {
+	background-color: var(--sl-color-accent-low);
+	color: var(--sl-color-accent-high);
+}
+
+/* FAQ entries. */
+.sl-markdown-content details summary {
+	font-weight: 600;
+	cursor: pointer;
+}
+
+/* Maya API command flags: name, type and mode in one row. */
+.sl-markdown-content .maya-api-flag {
+	display: flex;
+	justify-content: space-between;
+	gap: 0.5rem;
+	padding: 0.2rem 0.4rem;
+	background-color: var(--sl-color-gray-6);
+	margin-top: 0.6rem;
+}
+.sl-markdown-content .maya-api-flag.api-header {
+	background-color: var(--sl-color-gray-5);
+	font-weight: 600;
+}
+.sl-markdown-content .maya-api-flag > * {
+	margin: 0;
+}
+.sl-markdown-content .maya-api-flag h4 {
+	min-width: 60%;
+}
+.sl-markdown-content .maya-api-flag p {
+	width: 120px;
+	padding-inline-start: 0.4rem;
+	border-inline-start: 3px solid var(--sl-color-bg);
+}
+
+/* Before/after sliders (public/scripts/before-after.js). Side by side until the script runs. */
+.sl-markdown-content .before-after {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5rem;
+}
+.sl-markdown-content .before-after > img {
+	flex: 1 1 280px;
+	min-width: 0;
+	margin: 0;
+}
+.sl-markdown-content .before-after.is-ready {
+	--position: 50%;
+	position: relative;
+	display: block;
+	overflow: hidden;
+	line-height: 0;
+	user-select: none;
+}
+.sl-markdown-content .before-after.is-ready > img {
+	display: block;
+	width: 100%;
+	max-width: none;
+}
+/* The before image sits on top of the after image and is cut off at the handle. */
+.sl-markdown-content .before-after.is-ready > img:first-of-type {
+	position: absolute;
+	inset: 0;
+	height: 100%;
+	object-fit: cover;
+	clip-path: inset(0 calc(100% - var(--position)) 0 0);
+}
+.sl-markdown-content .before-after input[type='range'] {
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	opacity: 0;
+	cursor: ew-resize;
+}
+.sl-markdown-content .before-after__handle {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: var(--position);
+	width: 3px;
+	transform: translateX(-50%);
+	background: white;
+	box-shadow: 0 0 6px rgb(0 0 0 / 0.5);
+	pointer-events: none;
+}
+.sl-markdown-content .before-after__handle::after {
+	content: '◀ ▶';
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	padding: 0.5rem 0.4rem;
+	border: 3px solid white;
+	border-radius: 999px;
+	background: rgb(0 0 0 / 0.35);
+	color: white;
+	font-size: 0.6rem;
+	line-height: 1;
+	white-space: nowrap;
+}
+.sl-markdown-content .before-after input[type='range']:focus-visible ~ .before-after__handle::after {
+	outline: 2px solid var(--sl-color-accent-high);
+	outline-offset: 2px;
+}
+.sl-markdown-content .before-after__label {
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	padding: 0.4rem 0.6rem;
+	border-radius: 3px;
+	background: rgb(0 0 0 / 0.5);
+	color: white;
+	font-size: var(--sl-text-xs);
+	line-height: 1.2;
+	text-transform: uppercase;
+	letter-spacing: 0.05em;
+	pointer-events: none;
+	opacity: 0;
+	transition: opacity 0.2s;
+}
+.sl-markdown-content .before-after:hover .before-after__label {
+	opacity: 1;
+}
+.sl-markdown-content .before-after__label--start {
+	left: 0.75rem;
+}
+.sl-markdown-content .before-after__label--end {
+	right: 0.75rem;
+}
+
+/* Small UI icons at the start of a list item (Unreal NoiseFX buttons). */
+.sl-markdown-content img.inline-icon {
+	display: inline;
+	height: 1.75rem;
+	width: auto;
+	margin: 0 0.4rem 0 0;
+	vertical-align: middle;
+}

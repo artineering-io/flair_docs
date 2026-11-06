@@ -1,0 +1,2 @@
+# Docs media (images and clips) lives in Git LFS
+public/media/** filter=lfs diff=lfs merge=lfs -text
