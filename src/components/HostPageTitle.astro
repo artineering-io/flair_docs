@@ -1,0 +1,13 @@
+---
+// Page title plus hidden Pagefind host tags.
+import Default from '@astrojs/starlight/components/PageTitle.astro';
+import { hostsForEntry } from '../lib/hosts';
+
+// The title sits inside <main data-pagefind-body>, so tags here are always indexed.
+// The spans are empty on purpose: an inline "host:value" sets the filter without adding
+// the word "unreal" or "maya" to the page's searchable text.
+const hosts = hostsForEntry(Astro.locals.starlightRoute.entry.id);
+---
+
+<Default />
+{hosts.map((host) => <span data-pagefind-filter={`host:${host}`} hidden />)}
