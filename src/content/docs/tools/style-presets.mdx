@@ -1,0 +1,22 @@
+---
+title: Style Presets
+description: Save and load styles.
+sidebar:
+  order: 2
+---
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Content as Unreal } from '../../../partials/unreal/tools/style-presets.md';
+import { Content as Maya } from '../../../partials/maya/tools/style-presets.md';
+
+<Tabs syncKey="host">
+<TabItem label="Unreal Engine">
+
+<Unreal />
+
+</TabItem>
+<TabItem label="Maya">
+
+<Maya />
+
+</TabItem>
+</Tabs>

@@ -1,0 +1,19 @@
+---
+title: Bleeding
+description: Colors bleeding into each other, as wet paint does.
+---
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Content as Maya } from '../../../partials/maya/effect-pages/bleeding.md';
+
+<Tabs syncKey="host">
+<TabItem label="Unreal Engine">
+
+In Flair for Unreal Engine, this effect comes from the `Flair_Bleeding_2Pass` and `Flair_Bleeding_4Pass` effect layers in `/Flair/Effects`. Add them to the **Effect Layers** of a Flair Style actor; the effect's parameters then appear under **Parameters** in the actor's Details panel. See [Breaking down the Flair Style Actor](/unreal/artist-guide/style-actor/) for how both work.
+
+</TabItem>
+<TabItem label="Maya">
+
+<Maya />
+
+</TabItem>
+</Tabs>

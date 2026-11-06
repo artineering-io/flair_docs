@@ -1,0 +1,22 @@
+---
+title: NoiseFX
+description: Art-direct effects procedurally per material.
+sidebar:
+  order: 1
+---
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Content as Unreal } from '../../../partials/unreal/tools/noisefx.md';
+import { Content as Maya } from '../../../partials/maya/tools/noisefx.md';
+
+<Tabs syncKey="host">
+<TabItem label="Unreal Engine">
+
+<Unreal />
+
+</TabItem>
+<TabItem label="Maya">
+
+<Maya />
+
+</TabItem>
+</Tabs>
