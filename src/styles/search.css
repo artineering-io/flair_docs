@@ -1,4 +1,0 @@
-/* Pagefind's filter panel, hidden: the sidebar host switcher sets the filter instead. */
-#starlight__search .pagefind-ui__filter-panel {
-	display: none;
-}

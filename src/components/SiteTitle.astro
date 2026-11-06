@@ -1,0 +1,44 @@
+---
+// Logo and wordmark, plus a "Docs" badge.
+import Default from '@astrojs/starlight/components/SiteTitle.astro';
+---
+
+<div class="site-title-group">
+	<Default />
+	<span class="badge">Docs</span>
+</div>
+
+<style>
+	.site-title-group {
+		display: flex;
+		align-items: center;
+		gap: 0.6rem;
+		min-width: 0;
+	}
+	/* Starlight's link holds the logo and the "Flair" title; style that title as the brand wordmark. */
+	.site-title-group :global(.site-title) {
+		gap: 0.6rem;
+		color: var(--sl-color-white);
+	}
+	.site-title-group :global(.site-title img) {
+		height: 1.9rem;
+	}
+	.site-title-group :global(.site-title span) {
+		font-family: var(--flair-font-display);
+		font-size: 1.35rem;
+		font-weight: 700;
+		letter-spacing: 0.16em;
+		text-transform: uppercase;
+		padding-top: 0.2em; /* a touch more than headings: optically tuned for the wordmark */
+	}
+	.badge {
+		font-size: 0.7rem;
+		font-weight: 700;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+		color: var(--sl-color-gray-3);
+		border: 1px solid var(--sl-color-gray-5);
+		border-radius: 999px;
+		padding: 0.15rem 0.5rem;
+	}
+</style>

@@ -1,7 +1,25 @@
 ---
-// Page title plus hidden Pagefind host tags.
+// Breadcrumbs, page title, and hidden Pagefind host tags.
 import Default from '@astrojs/starlight/components/PageTitle.astro';
+import type { StarlightRouteData } from '@astrojs/starlight/route-data';
 import { hostsForEntry } from '../lib/hosts';
+
+type Entry = StarlightRouteData['sidebar'][number];
+
+// The labels of the sidebar groups that hold the current page, outermost first: the top-level
+// groups are "Unreal Engine", "Maya", "Effects" and "Tools", so the trail starts with the host
+// or shared section, e.g. Maya / Styles / Style Library.
+function trail(entries: Entry[], labels: string[] = []): string[] | undefined {
+	for (const entry of entries) {
+		if (entry.type === 'link' && entry.isCurrent) return labels;
+		if (entry.type === 'group') {
+			const found = trail(entry.entries, [...labels, entry.label]);
+			if (found) return found;
+		}
+	}
+}
+
+const crumbs = trail(Astro.locals.starlightRoute.sidebar) ?? [];
 
 // The title sits inside <main data-pagefind-body>, so tags here are always indexed.
 // The spans are empty on purpose: an inline "host:value" sets the filter without adding
@@ -9,5 +27,30 @@ import { hostsForEntry } from '../lib/hosts';
 const hosts = hostsForEntry(Astro.locals.starlightRoute.entry.id);
 ---
 
+{/* Kept out of the search index, or every Maya page would match a search for "Maya". */}
+{
+	crumbs.length > 0 && (
+		<nav class="crumbs" aria-label="Breadcrumbs" data-pagefind-ignore>
+			{crumbs.map((label) => <span>{label}</span>)}
+		</nav>
+	)
+}
 <Default />
 {hosts.map((host) => <span data-pagefind-filter={`host:${host}`} hidden />)}
+
+<style>
+	.crumbs {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: 0.4rem;
+		font-size: 0.8rem;
+		color: var(--sl-color-gray-3);
+		margin-bottom: 0.75rem;
+	}
+	.crumbs span + span::before {
+		content: '/';
+		margin-inline-end: 0.4rem;
+		color: var(--sl-color-gray-4);
+	}
+</style>

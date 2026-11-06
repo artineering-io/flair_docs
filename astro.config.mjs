@@ -78,7 +78,15 @@ export default defineConfig({
 		mermaid({ mermaidConfig: { look: 'handDrawn' } }),
 		starlight({
 			title: 'Flair',
-			customCss: ['./src/styles/search.css', './src/styles/content.css'],
+			logo: { src: './src/assets/flair-logo.png', alt: '' },
+			customCss: [
+				'@fontsource/lato/400.css',
+				'@fontsource/lato/400-italic.css',
+				'@fontsource/lato/700.css',
+				'@fontsource/josefin-sans/700.css',
+				'./src/styles/chrome.css',
+				'./src/styles/content.css',
+			],
 			pagination: false,
 			head: [
 				{ tag: 'script', attrs: { src: '/scripts/ui-screenshots.js', defer: true } },
@@ -94,6 +102,7 @@ export default defineConfig({
 				Head: './src/components/HostHead.astro',
 				PageTitle: './src/components/HostPageTitle.astro',
 				Sidebar: './src/components/HostSidebar.astro',
+				SiteTitle: './src/components/SiteTitle.astro',
 			},
 		}),
 	],

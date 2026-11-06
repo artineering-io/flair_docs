@@ -50,6 +50,8 @@ const shared = sidebar.filter((entry) => !HOSTS.some((host) => host === sectionO
 	<SidebarSublist sublist={shared} />
 </SidebarPersister>
 
+<p class="thanks">Thanks for using Flair ❤️</p>
+
 <div class="md:sl-hidden">
 	<MobileMenuFooter />
 </div>
@@ -87,24 +89,40 @@ const shared = sidebar.filter((entry) => !HOSTS.some((host) => host === sectionO
 <style>
 	.host-switcher {
 		display: flex;
-		gap: 0.25rem;
-		margin-bottom: 1rem;
+		padding: 3px;
+		background: var(--sl-color-gray-6);
+		border: 1px solid var(--sl-color-gray-5);
+		border-radius: 10px;
+		margin-bottom: 1.25rem;
 	}
 	.host-switcher button {
 		flex: 1;
-		padding: 0.3em 0.5rem;
-		border: 1px solid var(--sl-color-hairline-light);
-		border-radius: 0.25rem;
+		padding: 0.4em 0.5rem;
+		border: 0;
+		border-radius: 7px;
 		background: none;
-		color: var(--sl-color-gray-2);
+		color: var(--sl-color-gray-3);
 		font: inherit;
-		font-weight: 600;
+		font-size: 0.875rem;
+		font-weight: 700;
 		cursor: pointer;
+	}
+	.host-switcher button:hover {
+		color: var(--sl-color-white);
 	}
 	:global(html[data-host='unreal']) [data-host-button='unreal'],
 	:global(html[data-host='maya']) [data-host-button='maya'] {
-		background-color: var(--sl-color-text-accent);
-		color: var(--sl-color-text-invert);
+		background-color: var(--sl-color-black);
+		color: var(--sl-color-white);
+		box-shadow: 0 1px 3px rgb(0 0 0 / 0.25), 0 0 0 1px var(--sl-color-gray-5);
+	}
+
+	.thanks {
+		margin-top: 2rem;
+		/* Line up with the sidebar items' text; Starlight's item padding is 0.5rem, scoped to its lists. */
+		padding-inline-start: 0.5rem;
+		font-size: 0.8rem;
+		color: var(--sl-color-gray-3);
 	}
 
 	[data-sidebar-host] {

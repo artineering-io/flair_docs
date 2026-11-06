@@ -1,0 +1,95 @@
+/* Site chrome: font, header, layout, sidebar, "On this page" and search. Page content lives in content.css. */
+:root {
+	--sl-font: 'Lato', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+	/* Brand display face for the wordmark and home-page headings. Josefin Sans sits high on its
+	   line, so text set in it gets a small padding-top (0.15em) to look vertically centred. */
+	--flair-font-display: 'Josefin Sans', var(--sl-font);
+	/* The header blends with the page instead of sitting on a grey bar; content blurs under it. */
+	--sl-color-bg-nav: color-mix(in srgb, var(--sl-color-black) 88%, transparent);
+	/* Same for the sidebar: page background, separated by a hairline. */
+	--sl-color-bg-sidebar: var(--sl-color-black);
+}
+
+header.header {
+	backdrop-filter: blur(10px);
+	border-bottom: 1px solid var(--sl-color-hairline);
+}
+
+site-search button[data-open-modal] {
+	border-radius: 8px;
+}
+
+#starlight__sidebar {
+	border-inline-end: 1px solid var(--sl-color-hairline);
+}
+.sidebar-content {
+	font-size: 0.875rem;
+}
+.sidebar-content a {
+	border-radius: 6px;
+	padding-block: 0.3rem;
+}
+.sidebar-content a:hover {
+	color: var(--sl-color-white);
+	background: var(--sl-color-gray-6);
+}
+/* A tinted row with an accent bar instead of Starlight's solid accent fill, which shouts. */
+.sidebar-content a[aria-current='page'],
+.sidebar-content a[aria-current='page']:hover {
+	background: var(--sl-color-accent-low);
+	color: var(--sl-color-accent-high);
+	font-weight: 700;
+	box-shadow: inset 2px 0 0 var(--sl-color-accent);
+}
+:root[data-theme='light'] .sidebar-content a[aria-current='page'] {
+	color: var(--sl-color-accent);
+}
+.sidebar-content .large {
+	font-size: 0.9rem;
+	font-weight: 700;
+	color: var(--sl-color-white);
+}
+.sidebar-content summary {
+	border-radius: 6px;
+}
+
+/* "On this page": a small label and quieter links, so it reads as navigation rather than content. */
+.right-sidebar-panel h2 {
+	font-size: 0.72rem;
+	text-transform: uppercase;
+	letter-spacing: 0.08em;
+	color: var(--sl-color-gray-3);
+}
+starlight-toc a {
+	font-size: 0.82rem;
+	color: var(--sl-color-gray-3);
+}
+starlight-toc a[aria-current='true'] {
+	color: var(--sl-color-accent-high);
+	font-weight: 700;
+}
+:root[data-theme='light'] starlight-toc a[aria-current='true'] {
+	color: var(--sl-color-accent);
+}
+
+/* Starlight grows the right column with the window; pin it to the sidebar width and give the
+   space to the content instead, since the pages are screenshot-heavy. */
+:root {
+	--sl-content-width: 60rem;
+}
+
+@media (min-width: 72rem) {
+	.right-sidebar-container {
+		width: var(--sl-sidebar-width);
+	}
+
+	[data-has-sidebar][data-has-toc] .main-pane {
+		--sl-content-margin-inline: auto;
+		width: calc(100% - var(--sl-sidebar-width));
+	}
+}
+
+/* Pagefind's filter panel, hidden: the sidebar host switcher sets the filter instead. */
+#starlight__search .pagefind-ui__filter-panel {
+	display: none;
+}
