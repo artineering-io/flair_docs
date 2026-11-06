@@ -1,16 +1,18 @@
 /* Content classes used by pages migrated from the old docs site (docs.artineering.io). */
 
-.sl-markdown-content figure {
+/* Generic figure rules skip components marked not-content (as Starlight's own content styles do),
+   so home-page blocks and future components style their figures themselves. */
+.sl-markdown-content figure:not(:where(.not-content *)) {
 	margin-inline: auto;
 }
-.sl-markdown-content figure img,
-.sl-markdown-content figure video {
+.sl-markdown-content figure img:not(:where(.not-content *)),
+.sl-markdown-content figure video:not(:where(.not-content *)) {
 	display: block;
 	margin-inline: auto;
 	max-width: 100%;
 	height: auto;
 }
-.sl-markdown-content figcaption {
+.sl-markdown-content figcaption:not(:where(.not-content *)) {
 	font-size: var(--sl-text-sm);
 	font-style: italic;
 	text-align: center;

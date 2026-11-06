@@ -103,6 +103,7 @@ export default defineConfig({
 				PageTitle: './src/components/HostPageTitle.astro',
 				Sidebar: './src/components/HostSidebar.astro',
 				SiteTitle: './src/components/SiteTitle.astro',
+				Hero: './src/components/home/HomeHero.astro',
 			},
 		}),
 	],

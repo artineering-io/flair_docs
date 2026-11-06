@@ -1,0 +1,34 @@
+---
+// A titled grid of home cards.
+interface Props {
+	title: string;
+	columns: 2 | 3;
+}
+const { title, columns } = Astro.props;
+---
+
+<section class="not-content">
+	<h2>{title}</h2>
+	<div class="grid" style={`--columns: ${columns}`}><slot /></div>
+</section>
+
+<style>
+	h2 {
+		font-family: var(--flair-font-display);
+		font-size: 1.5rem;
+		font-weight: 700;
+		margin: 3rem 0 1rem;
+		padding-top: 0.15em;
+		color: var(--sl-color-white);
+	}
+	.grid {
+		display: grid;
+		grid-template-columns: repeat(var(--columns), 1fr);
+		gap: 1rem;
+	}
+	@media (max-width: 50rem) {
+		.grid {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>

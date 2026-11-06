@@ -1,0 +1,40 @@
+---
+// Home page hero: eyebrow, title and tagline from the page's front matter.
+const { data } = Astro.locals.starlightRoute.entry;
+const title = data.hero?.title ?? data.title;
+const tagline = data.hero?.tagline;
+---
+
+<div class="hero">
+	<div class="eyebrow">{data.title}</div>
+	<h1 id="_top" set:html={title} />
+	{tagline && <p class="tagline" set:html={tagline} />}
+</div>
+
+<style>
+	.hero {
+		padding-block: 1rem 0.5rem;
+	}
+	.eyebrow {
+		font-size: 0.78rem;
+		font-weight: 700;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+		color: var(--sl-color-text-accent);
+	}
+	h1 {
+		font-family: var(--flair-font-display);
+		font-weight: 700;
+		font-size: clamp(2.4rem, 4.5vw, 3.6rem);
+		line-height: 1.08;
+		margin-top: 0.6rem;
+		padding-top: 0.15em;
+		color: var(--sl-color-white);
+	}
+	.tagline {
+		font-size: 1.2rem;
+		color: var(--sl-color-gray-2);
+		max-width: 40rem;
+		margin-top: 1rem;
+	}
+</style>

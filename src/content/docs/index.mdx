@@ -1,11 +1,37 @@
 ---
 title: Flair documentation
+description: Guides and reference for Flair in Unreal Engine and Maya.
 template: splash
 hero:
-  tagline: Stylized rendering for Unreal Engine and Maya.
-  actions:
-    - text: Unreal Engine
-      link: /unreal/installation/
-    - text: Maya
-      link: /maya/setup/installation/
+  title: Art-direct stylized rendering
+  tagline: 'Guides and reference for Flair in Unreal Engine and Maya: install it, build a look, and art-direct it down to the vertex.'
 ---
+
+import StyleStrip from '../../components/home/StyleStrip.astro';
+import HomeGrid from '../../components/home/HomeGrid.astro';
+import HomeCard from '../../components/home/HomeCard.astro';
+
+{/* Placeholder images until we pick final renders. */}
+<StyleStrip
+	images={[
+		{ src: '/media/maya/styles/library/watercolor/header.jpg', label: 'Watercolor' },
+		{ src: '/media/maya/styles/library/hatching/header.jpg', label: 'Hatching' },
+		{ src: '/media/maya/styles/library/cutout/header.jpg', label: 'Cutout' },
+		{ src: '/media/maya/styles/library/warp/header.jpg', label: 'Warp' },
+	]}
+/>
+
+<HomeGrid title="Choose your host" columns={2}>
+	<HomeCard href="/unreal/" chip="UE 5.7+" title="Flair for Unreal Engine" items={['Installation', 'Artist Guide', 'Technical Artist Guide']}>
+		Style actors, effect layers and post-process materials for real-time stylization.
+	</HomeCard>
+	<HomeCard href="/maya/" chip="Maya 2023+" title="Flair for Maya" items={['Installation', 'Getting Started', 'Style Library']}>
+		The Flair shader, style library and art-direction tools inside Maya’s viewport.
+	</HomeCard>
+</HomeGrid>
+
+<HomeGrid title="Shared across both hosts" columns={3}>
+	<HomeCard href="/effects/ambient-occlusion/" title="Effects">Pigment, bleeding, edge darkening, lines and more.</HomeCard>
+	<HomeCard href="/tools/noisefx/" title="Tools">NoiseFX and Style Presets, in both hosts.</HomeCard>
+	<HomeCard href="https://discord.gg/6FJZCscQUM" title="Community">Questions, feedback and showcases on Discord.</HomeCard>
+</HomeGrid>

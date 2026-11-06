@@ -1,0 +1,79 @@
+---
+// A linked card with an optional chip and an optional list of what's inside.
+interface Props {
+	href: string;
+	title: string;
+	chip?: string;
+	items?: string[];
+}
+const { href, title, chip, items } = Astro.props;
+---
+
+<a class="card" href={href}>
+	{chip && <span class="chip">{chip}</span>}
+	<h3>{title}</h3>
+	<div class="text"><slot /></div>
+	{items && <ul>{items.map((item) => <li>{item}</li>)}</ul>}
+</a>
+
+<style>
+	.card {
+		display: block;
+		padding: 1.25rem 1.4rem;
+		border: 1px solid var(--sl-color-gray-5);
+		border-radius: 14px;
+		background: linear-gradient(180deg, var(--sl-color-gray-6), var(--sl-color-black));
+		color: inherit;
+		text-decoration: none;
+		transition:
+			border-color 0.15s,
+			transform 0.15s;
+	}
+	.card:hover {
+		border-color: var(--sl-color-text-accent);
+		transform: translateY(-2px);
+	}
+	.chip {
+		display: inline-block;
+		margin-bottom: 0.8rem;
+		font-size: 0.72rem;
+		font-weight: 700;
+		letter-spacing: 0.06em;
+		padding: 0.15rem 0.55rem;
+		border-radius: 999px;
+		background: var(--sl-color-accent-low);
+		color: var(--sl-color-text-accent);
+	}
+	h3 {
+		font-family: var(--flair-font-display);
+		font-size: 1.3rem;
+		font-weight: 700;
+		margin: 0 0 0.3rem;
+		padding-top: 0.15em;
+		color: var(--sl-color-white);
+	}
+	/* A div, not a p: MDX wraps multi-line slot text in its own <p>, which can't nest inside one. */
+	.text {
+		color: var(--sl-color-gray-3);
+		font-size: 0.95rem;
+	}
+	.text :global(p) {
+		margin: 0;
+	}
+	ul {
+		list-style: none;
+		padding: 0;
+		margin: 1rem 0 0;
+		display: grid;
+		gap: 0.35rem;
+	}
+	li {
+		font-size: 0.92rem;
+		color: var(--sl-color-gray-2);
+	}
+	li::before {
+		content: '→';
+		color: var(--sl-color-text-accent);
+		margin-inline-end: 0.5rem;
+	}
+</style>
