@@ -5,8 +5,8 @@ Layout: /media/<page path>/<file>, e.g. /media/maya/styles/library/watercolor/br
 
 Owner of a file used by several pages: a shared /effects/ or /tools/ page if one uses it (that page is
 the effect's or tool's home), otherwise the deepest section all its pages sit in (/media/shared/ only
-when they span hosts). Idempotent: run it after convert_maya.py, or
-alone. Pass --dry-run to print the plan without touching anything.
+when they span hosts). Idempotent: run it after moving or renaming pages. Pass --dry-run to print
+the plan without touching anything.
 """
 import filecmp
 import os
@@ -68,6 +68,9 @@ def media_users():
 
 
 def owner(pages):
+	# The home page (path '') only showcases images that belong to other pages, so it never owns one
+	# unless nothing else uses it.
+	pages = {p for p in pages if p} or pages
 	if len(pages) == 1:
 		return next(iter(pages))
 	shared = sorted(p for p in pages if p.split('/')[0] in SHARED_SECTIONS)

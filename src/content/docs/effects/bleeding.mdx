@@ -3,7 +3,6 @@ title: Bleeding
 description: Colors bleeding into each other, as wet paint does.
 ---
 import { Tabs, TabItem } from '@astrojs/starlight/components';
-import { Content as Maya } from '../../../partials/maya/effect-pages/bleeding.md';
 
 <Tabs syncKey="host">
 <TabItem label="Unreal Engine">
@@ -13,7 +12,13 @@ In Flair for Unreal Engine, this effect comes from the `Flair_Bleeding_2Pass` an
 </TabItem>
 <TabItem label="Maya">
 
-<Maya />
+Maximum width for the bleeding effect. Pushing this too far might affect performance.
+<figure>
+<video autoplay loop muted playsinline>
+<source src="/media/effects/bleeding/bleeding-radius.mp4" type="video/mp4" />
+</video>
+<figcaption>Bleeding radius between 1 and 40.</figcaption>
+</figure>
 
 </TabItem>
 </Tabs>
