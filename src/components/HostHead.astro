@@ -1,0 +1,28 @@
+---
+// Starlight's head, plus the reader's host on <html data-host>.
+import Default from '@astrojs/starlight/components/Head.astro';
+import { HOSTS, HOST_TAB_LABELS, HOST_TABS_STORAGE_KEY, STORAGE_KEY } from '../lib/hosts';
+
+// This script is inline and blocking on purpose, the same way Starlight sets the theme. The sidebar
+// shows a host's pages based on data-host, so setting it any later would briefly flash the wrong
+// host's pages (a "flash of unstyled content").
+// A host page's URL decides the host and gets remembered. Every other page reuses the stored one.
+// The host's tab label is also written under Starlight's synced-tabs key, so <Tabs syncKey="host">
+// opens on the reader's host. Starlight restores that key while the body renders, after this runs.
+// Rewriting it on every page means peeking at the other host's tab doesn't stick.
+---
+
+<Default />
+<script
+	is:inline
+	define:vars={{ hosts: HOSTS, key: STORAGE_KEY, tabsKey: HOST_TABS_STORAGE_KEY, tabLabels: HOST_TAB_LABELS }}
+>
+	const section = location.pathname.split('/')[1];
+	let host = hosts.includes(section) ? section : null;
+	try {
+		if (host) localStorage.setItem(key, host);
+		else host = localStorage.getItem(key);
+		if (hosts.includes(host)) localStorage.setItem(tabsKey, tabLabels[host]);
+	} catch {}
+	if (hosts.includes(host)) document.documentElement.dataset.host = host;
+</script>

@@ -2,9 +2,17 @@
 
 export const HOSTS = ['unreal', 'maya'] as const;
 export type Host = (typeof HOSTS)[number];
+export const HOST_LABELS: Record<Host, string> = { unreal: 'UE', maya: 'Maya' };
 
 const SHARED_SECTIONS = ['effects', 'tools'];
-const STORAGE_KEY = 'flair:host';
+export const STORAGE_KEY = 'flair:host';
+export const HOST_CHANGE_EVENT = 'flair:host-change';
+
+/** `<Tabs syncKey>` for per-host tabs, and the tab label that names each host. */
+export const HOST_TABS_SYNC_KEY = 'host';
+export const HOST_TAB_LABELS: Record<Host, string> = { unreal: 'Unreal Engine', maya: 'Maya' };
+/** Where Starlight remembers the selected tab for HOST_TABS_SYNC_KEY. */
+export const HOST_TABS_STORAGE_KEY = `starlight-synced-tabs__${HOST_TABS_SYNC_KEY}`;
 
 /** Hosts a docs entry belongs to, from its top-level folder. */
 export function hostsForEntry(id: string): Host[] {
@@ -15,21 +23,38 @@ export function hostsForEntry(id: string): Host[] {
 	return HOSTS.filter((host) => host === section);
 }
 
-/** The reader's host: from the URL, else the last host page they visited. */
+/** The reader's selected host, if any. */
 export function currentHost(): Host | undefined {
-	const section = location.pathname.split('/')[1];
-	const fromUrl = HOSTS.find((host) => host === section);
+	// HostHead.astro sets this before first paint, from the URL or the remembered host.
+	// If storage is blocked, shared pages have no host and search everything, which is the safe fallback.
+	const host = document.documentElement.dataset.host;
+	return HOSTS.find((h) => h === host);
+}
+
+/** Selects the reader's host for the sidebar, search and per-host tabs, and remembers it. */
+export function setHost(host: Host) {
+	document.documentElement.dataset.host = host;
 	try {
-		if (fromUrl) {
-			localStorage.setItem(STORAGE_KEY, fromUrl);
-			return fromUrl;
-		}
-		// Shared pages (/effects/, /tools/) keep whichever host the reader came from.
-		const stored = localStorage.getItem(STORAGE_KEY);
-		return HOSTS.find((host) => host === stored);
-	} catch {
-		// Storage can be blocked (private windows, strict privacy settings). Shared pages then
-		// search unfiltered, which is the safe fallback.
-		return fromUrl;
+		localStorage.setItem(STORAGE_KEY, host);
+		localStorage.setItem(HOST_TABS_STORAGE_KEY, HOST_TAB_LABELS[host]);
+	} catch {}
+	showHostTabs(host);
+	document.dispatchEvent(new CustomEvent(HOST_CHANGE_EVENT));
+}
+
+type StarlightTabs = HTMLElement & {
+	tabs: HTMLAnchorElement[];
+	switchTab(tab: HTMLAnchorElement, index: number, shouldSync?: boolean): void;
+};
+
+function showHostTabs(host: Host) {
+	// switchTab() and tabs are public on Starlight's <starlight-tabs> element (user-components/Tabs.astro).
+	// shouldSync = false skips Starlight's own syncing, which would focus the tab and scroll the page
+	// towards it. Every host tab group on the page is switched here instead, and the choice is already
+	// stored under Starlight's key above.
+	const selector = `starlight-tabs[data-sync-key="${HOST_TABS_SYNC_KEY}"]`;
+	for (const group of document.querySelectorAll<StarlightTabs>(selector)) {
+		const index = group.tabs.findIndex((tab) => tab.textContent?.trim() === HOST_TAB_LABELS[host]);
+		if (index !== -1) group.switchTab(group.tabs[index], index, false);
 	}
 }

@@ -1,0 +1,118 @@
+---
+// Sidebar with a host switcher on top: the selected host's pages, then the shared sections.
+import MobileMenuFooter from '@astrojs/starlight/components/MobileMenuFooter.astro';
+import SidebarPersister from '@astrojs/starlight/components/SidebarPersister.astro';
+import SidebarSublist from '@astrojs/starlight/components/SidebarSublist.astro';
+import { HOSTS, HOST_LABELS } from '../lib/hosts';
+
+const { sidebar } = Astro.locals.starlightRoute;
+type Entry = (typeof sidebar)[number];
+
+function firstHref(entries: Entry[]): string | undefined {
+	for (const entry of entries) {
+		const href = entry.type === 'link' ? entry.href : firstHref(entry.entries);
+		if (href) return href;
+	}
+}
+
+// A config group is matched to a host by the folder its links live in, not by its label, so
+// renaming or reordering groups in astro.config.mjs can't break the switcher.
+const sectionOf = (entry: Entry) => firstHref([entry])?.split('/')[1];
+const hostEntries = HOSTS.map((host) => {
+	const group = sidebar.find((entry) => entry.type === 'group' && sectionOf(entry) === host);
+	return { host, entries: group?.type === 'group' ? group.entries : [] };
+});
+const shared = sidebar.filter((entry) => !HOSTS.some((host) => host === sectionOf(entry)));
+
+// Each host's pages are rendered without the group heading, because the switcher already names the host.
+// Both lists are on every page, and CSS shows the one that matches html[data-host]. That way the
+// right one is visible on first paint, before any script runs.
+---
+
+<div class="host-switcher" role="group" aria-label="Host">
+	{
+		hostEntries.map(({ host, entries }) => (
+			<button type="button" data-host-button={host} data-start={firstHref(entries)}>
+				{HOST_LABELS[host]}
+			</button>
+		))
+	}
+</div>
+
+<SidebarPersister>
+	{
+		hostEntries.map(({ host, entries }) => (
+			<div data-sidebar-host={host}>
+				<SidebarSublist sublist={entries} />
+			</div>
+		))
+	}
+	<SidebarSublist sublist={shared} />
+</SidebarPersister>
+
+<div class="md:sl-hidden">
+	<MobileMenuFooter />
+</div>
+
+<script>
+	import { HOSTS, setHost, type Host } from '../lib/hosts';
+
+	const buttons = document.querySelectorAll<HTMLButtonElement>('[data-host-button]');
+	const syncPressed = () => {
+		for (const button of buttons) {
+			button.setAttribute(
+				'aria-pressed',
+				String(button.dataset.hostButton === document.documentElement.dataset.host)
+			);
+		}
+	};
+
+	// On a host page, switching goes to the other host's first page (agreed for now).
+	// On a shared page, it switches in place, so the reader stays on the effect they're reading.
+	for (const button of buttons) {
+		button.addEventListener('click', () => {
+			const host = button.dataset.hostButton as Host;
+			const urlHost = HOSTS.find((h) => h === location.pathname.split('/')[1]);
+			if (urlHost && urlHost !== host && button.dataset.start) {
+				location.href = button.dataset.start;
+				return;
+			}
+			setHost(host);
+			syncPressed();
+		});
+	}
+	syncPressed();
+</script>
+
+<style>
+	.host-switcher {
+		display: flex;
+		gap: 0.25rem;
+		margin-bottom: 1rem;
+	}
+	.host-switcher button {
+		flex: 1;
+		padding: 0.3em 0.5rem;
+		border: 1px solid var(--sl-color-hairline-light);
+		border-radius: 0.25rem;
+		background: none;
+		color: var(--sl-color-gray-2);
+		font: inherit;
+		font-weight: 600;
+		cursor: pointer;
+	}
+	:global(html[data-host='unreal']) [data-host-button='unreal'],
+	:global(html[data-host='maya']) [data-host-button='maya'] {
+		background-color: var(--sl-color-text-accent);
+		color: var(--sl-color-text-invert);
+	}
+
+	[data-sidebar-host] {
+		display: none;
+		margin-bottom: 1rem;
+	}
+	:global(html[data-host='unreal']) [data-sidebar-host='unreal'],
+	:global(html[data-host='maya']) [data-sidebar-host='maya'] {
+		display: block;
+	}
+</style>

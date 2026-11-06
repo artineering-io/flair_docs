@@ -8,6 +8,7 @@ export default defineConfig({
 	integrations: [
 		starlight({
 			title: 'Flair',
+			customCss: ['./src/styles/search.css'],
 			sidebar: [
 				{ label: 'Unreal Engine', items: [{ autogenerate: { directory: 'unreal' } }] },
 				{ label: 'Maya', items: [{ autogenerate: { directory: 'maya' } }] },
@@ -15,7 +16,9 @@ export default defineConfig({
 				{ label: 'Tools', items: [{ autogenerate: { directory: 'tools' } }] },
 			],
 			components: {
+				Head: './src/components/HostHead.astro',
 				PageTitle: './src/components/HostPageTitle.astro',
+				Sidebar: './src/components/HostSidebar.astro',
 			},
 		}),
 	],
