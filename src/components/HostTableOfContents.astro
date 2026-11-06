@@ -1,0 +1,30 @@
+---
+// "On this page", listing only the headings of the tab the reader is looking at.
+import Default from '@astrojs/starlight/components/TableOfContents.astro';
+---
+
+<Default />
+
+<script>
+	// Shared pages hold both hosts' content in Unreal Engine / Maya tabs, and Starlight lists every
+	// heading in the page, so the other host's headings would show too (and link to hidden text).
+	// Entries whose heading sits in a hidden tab panel are hidden instead. Watching the panels'
+	// hidden attribute covers every way a tab changes: the host switcher, a tab click, or Starlight
+	// restoring the synced tab. The phone dropdown version of the list is filtered the same way.
+	const update = () => {
+		const links = document.querySelectorAll<HTMLAnchorElement>(
+			'starlight-toc a[href^="#"], mobile-starlight-toc a[href^="#"]'
+		);
+		for (const link of links) {
+			const heading = document.getElementById(decodeURIComponent(link.hash.slice(1)));
+			link.parentElement!.hidden = !!heading?.closest('[role="tabpanel"][hidden]');
+		}
+	};
+
+	const panels = document.querySelectorAll('[role="tabpanel"]');
+	if (panels.length) {
+		update();
+		const observer = new MutationObserver(update);
+		for (const panel of panels) observer.observe(panel, { attributes: true, attributeFilter: ['hidden'] });
+	}
+</script>

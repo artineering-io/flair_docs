@@ -104,6 +104,7 @@ export default defineConfig({
 				Sidebar: './src/components/HostSidebar.astro',
 				SiteTitle: './src/components/SiteTitle.astro',
 				Hero: './src/components/home/HomeHero.astro',
+				TableOfContents: './src/components/HostTableOfContents.astro',
 			},
 		}),
 	],
