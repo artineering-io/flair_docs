@@ -1,5 +1,22 @@
 /* Content classes used by pages migrated from the old docs site (docs.artineering.io). */
 
+/* Starlight grows the right column with the window; pin it to the sidebar width and give the
+   space to the content instead, since the pages are screenshot-heavy. */
+:root {
+	--sl-content-width: 60rem;
+}
+
+@media (min-width: 72rem) {
+	.right-sidebar-container {
+		width: var(--sl-sidebar-width);
+	}
+
+	[data-has-sidebar][data-has-toc] .main-pane {
+		--sl-content-margin-inline: auto;
+		width: calc(100% - var(--sl-sidebar-width));
+	}
+}
+
 .sl-markdown-content figure {
 	margin-inline: auto;
 }
