@@ -40,16 +40,39 @@ More shelf buttons will appear as we develop new tools and features.
 
 ## Add support for Render Passes
 
-Effects and the art-direction thereof require custom render passes to be rendered from the materials in the level. Therefore you will need to **modify your Master Material** to render the right data for each Flair render pass.
+Effects and their art direction need custom render passes rendered from the materials in your level. Each **Master Material** needs a **Flair Slab** for that: a material function in front of the material's outputs that renders the right data for each Flair render pass.
 
-To do so, open up your Master Material and add the **Flair Slab** material function in front of the _Substrate Slab_. Not all inputs need to be connected, but **all outputs of the slab need to be connected** onto the material for Flair to work properly.
+### Insert Flair Slabs automatically
+
+The first time you place a Flair Style in a project, Flair offers to insert the slabs for you. Click **Yes** and pick the folder with your master materials. Flair only asks once per project, and you can do it any time from the right-click menus:
+
+- **Content Browser → right-click a folder → Flair → Insert Flair Slabs** for every master material in the folder and its subfolders, after you confirm.
+- **Content Browser → right-click a master material → Flair → Insert Flair Slabs**
+- **Viewport or Outliner → right-click actors → Flair → Insert Flair Slabs** for the master materials of the selected actors.
+
+Flair picks the right slab for each material and wires it in. It skips materials that already have one, Flair's own materials, and materials that can't take one, such as post-process materials. The Output Log lists what was inserted and skipped.
+
+:::caution
+The materials are left modified but unsaved, and the insertion can't be undone with Ctrl+Z. Save them once you're happy with the result.
+:::
+
+**Remove Flair Slabs**, in the same menus, takes them out again and restores your original connections. Slabs don't change the look without a Flair Style, but they cost some performance, so remove them if you stop using Flair in a project.
+
+You might need to add the slab by hand if:
+
+- The Output Log says _Front Material isn't driven directly by a Substrate Slab_, for example because it goes through a reroute or a blend.
+- An actor's right-click menu has no **Flair** entry, because its materials aren't on a mesh or decal.
+
+### Add a Flair Slab by hand
+
+Open your Master Material and add the **Flair Slab** material function in front of the _Substrate Slab_. Not all inputs need to be connected, but **all outputs of the slab need to be connected** onto the material for Flair to work properly.
 
 <figure>
 <img src="/media/unreal/artist-guide/getting-started/flair-slab.png" alt="Flair Slab in front of the Substrate Slab" />
 <figcaption>The Flair Slab will automatically know what to render depending on the current Flair render pass.</figcaption>
 </figure>
 
-There are eight different Flair slabs to choose from, separated by how Unreal Engine renders them.
+There are nine different Flair slabs to choose from, separated by how Unreal Engine renders them.
 
 - **Opaque** - For opaque master materials without blending (Opaque, Masked)
 - **Translucent** - For translucent master materials (TranslucentGreyTransmittance, Additive, etc)
