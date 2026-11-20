@@ -52,6 +52,10 @@ The first time you place a Flair Style in a project, Flair offers to insert the 
 
 Flair picks the right slab for each material and wires it in. It skips materials that already have one, Flair's own materials, and materials that can't take one, such as post-process materials. The Output Log lists what was inserted and skipped.
 
+Fab materials (under `/Fab/`) are skipped too: Fab content can't reference Flair, so the slab couldn't be saved. To stylize them, duplicate the Fab master into your project and point its material instances to the copy.
+
+A progress dialog shows each material as it's processed. In each material, the slab takes the place of the node it feeds, and that node moves to the right to make room.
+
 :::caution
 The materials are left modified but unsaved, and the insertion can't be undone with Ctrl+Z. Save them once you're happy with the result.
 :::
@@ -75,7 +79,7 @@ Open your Master Material and add the **Flair Slab** material function in front 
 There are nine different Flair slabs to choose from, separated by how Unreal Engine renders them.
 
 - **Opaque** - For opaque master materials without blending (Opaque, Masked)
-- **Translucent** - For translucent master materials (TranslucentGreyTransmittance, Additive, etc)
+- **Translucent** - For translucent master materials (TranslucentGreyTransmittance, Additive, etc), and for opaque ones that use **Opacity** with a lit shading model other than Default Lit, such as Single Layer Water.
 - **Decals** - For decal materials (see [Decal materials](#decal-materials) below)
 
 <figure>
