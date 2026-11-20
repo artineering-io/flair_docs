@@ -127,7 +127,7 @@ The desktop setting has no effect when MSAA is enabled.
 
 ### Decal materials
 
-Decals use the **`Flair Slab Decals`** node, or **`Flair Slab Decals (Legacy)`** for the Legacy material system. The quickest start is `MM_Flair_Decal` or `MM_Flair_Decal_Legacy` in `/Flair/Materials`. To set up your own decal material:
+Decals use the **`Flair Slab Decals`** node, or **`Flair Slab Decals (Legacy)`** for the Legacy material system. The quickest start is `MM_Flair_Decal` or `MM_Flair_Decal_Legacy` in `/Flair/Materials/MasterMaterials`. To set up your own decal material:
 
 - **Material → Material Domain:** _**Deferred Decal**_
 - **Material → Blend Mode:** _**TranslucentGray**_
