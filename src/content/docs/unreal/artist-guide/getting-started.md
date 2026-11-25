@@ -65,7 +65,7 @@ The materials are left modified but unsaved, and the insertion can't be undone w
 You might need to add the slab by hand if:
 
 - The Output Log says _Front Material isn't driven directly by a Substrate Slab_, for example because it goes through a reroute or a blend.
-- An actor's right-click menu has no **Flair** entry, because its materials aren't on a mesh or decal.
+- An actor's right-click menu has no **Flair** entry, because its materials aren't on a mesh, decal or landscape.
 
 ### Add a Flair Slab by hand
 
