@@ -1,0 +1,36 @@
+---
+// Header and phone-menu social links, drawn with Font Awesome icons.
+import { Icon } from 'astro-icon/components';
+
+// Starlight's `social` option only takes its own icons (no globe), so the links live here instead.
+const links = [
+	{ icon: 'fa7-solid:globe', label: 'Artineering website', href: 'https://artineering.io' },
+	{ icon: 'fa7-brands:discord', label: 'Discord', href: 'https://discord.gg/6FJZCscQUM' },
+	{ icon: 'fa7-brands:youtube', label: 'YouTube', href: 'https://www.youtube.com/@artineering' },
+];
+---
+
+{links.map(({ icon, label, href }) => (
+	<a href={href} rel="me">
+		<span class="sr-only">{label}</span>
+		<Icon name={icon} aria-hidden="true" />
+	</a>
+))}
+
+<style>
+	/* Quiet grey until hovered, then the accent colour. */
+	a {
+		display: flex;
+		color: var(--sl-color-gray-3);
+		padding: 0.5em;
+		margin: -0.5em;
+	}
+	a:hover {
+		color: var(--sl-color-text-accent);
+	}
+	/* Font Awesome icons have different widths; a 1em box keeps them the same size as Starlight's. */
+	a :global(svg) {
+		width: 1em;
+		height: 1em;
+	}
+</style>

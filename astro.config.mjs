@@ -3,6 +3,7 @@ import { fileURLToPath } from 'node:url';
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 import mermaid from 'astro-mermaid';
+import icon from 'astro-icon';
 
 /** A sidebar group listing every page in a docs folder. */
 const folder = (label, directory) => ({
@@ -76,6 +77,8 @@ export default defineConfig({
 		// Must come before Starlight, so mermaid code blocks become diagrams before Starlight's
 		// code-block styling (Expressive Code) claims them.
 		mermaid({ mermaidConfig: { look: 'handDrawn' } }),
+		// Font Awesome and Simple Icons via Iconify; only the icons used get inlined as SVG.
+		icon(),
 		starlight({
 			title: 'Flair',
 			logo: { src: './src/assets/flair-logo.png', alt: '' },
@@ -103,6 +106,7 @@ export default defineConfig({
 				PageTitle: './src/components/HostPageTitle.astro',
 				Sidebar: './src/components/HostSidebar.astro',
 				SiteTitle: './src/components/SiteTitle.astro',
+				SocialIcons: './src/components/SocialIcons.astro',
 				Hero: './src/components/home/HomeHero.astro',
 				TableOfContents: './src/components/HostTableOfContents.astro',
 			},
