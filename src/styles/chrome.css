@@ -8,6 +8,16 @@
 	--sl-color-bg-nav: color-mix(in srgb, var(--sl-color-black) 88%, transparent);
 	/* Same for the sidebar: page background, separated by a hairline. */
 	--sl-color-bg-sidebar: var(--sl-color-black);
+	/* Accent from the Flair logo's blue ribbons (dark #2858a0, mid #3880c0, light #50b0e0). */
+	--sl-color-accent-low: hsl(208, 55%, 16%);
+	--sl-color-accent: #3880c0;
+	--sl-color-accent-high: hsl(200, 70%, 75%);
+}
+
+:root[data-theme='light'] {
+	--sl-color-accent-low: hsl(208, 60%, 90%);
+	--sl-color-accent: #3880c0;
+	--sl-color-accent-high: #2858a0;
 }
 
 header.header {
