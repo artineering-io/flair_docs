@@ -2,7 +2,7 @@
 
 export const HOSTS = ['unreal', 'maya'] as const;
 export type Host = (typeof HOSTS)[number];
-export const HOST_LABELS: Record<Host, string> = { unreal: 'UE', maya: 'Maya' };
+export const HOST_ICONS: Record<Host, string> = { unreal: 'fa7-brands:unreal-engine', maya: 'simple-icons:autodeskmaya' };
 
 const SHARED_SECTIONS = ['effects', 'tools'];
 export const STORAGE_KEY = 'flair:host';

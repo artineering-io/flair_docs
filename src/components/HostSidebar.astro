@@ -3,7 +3,8 @@
 import MobileMenuFooter from '@astrojs/starlight/components/MobileMenuFooter.astro';
 import SidebarPersister from '@astrojs/starlight/components/SidebarPersister.astro';
 import SidebarSublist from '@astrojs/starlight/components/SidebarSublist.astro';
-import { HOSTS, HOST_LABELS } from '../lib/hosts';
+import { Icon } from 'astro-icon/components';
+import { HOSTS, HOST_ICONS, HOST_TAB_LABELS } from '../lib/hosts';
 
 const { sidebar } = Astro.locals.starlightRoute;
 type Entry = (typeof sidebar)[number];
@@ -32,8 +33,9 @@ const shared = sidebar.filter((entry) => !HOSTS.some((host) => host === sectionO
 <div class="host-switcher" role="group" aria-label="Host">
 	{
 		hostEntries.map(({ host, entries }) => (
-			<button type="button" data-host-button={host} data-start={firstHref(entries)}>
-				{HOST_LABELS[host]}
+			<button type="button" data-host-button={host} data-start={firstHref(entries)} title={HOST_TAB_LABELS[host]}>
+				<span class="sr-only">{HOST_TAB_LABELS[host]}</span>
+				<Icon name={HOST_ICONS[host]} aria-hidden="true" />
 			</button>
 		))
 	}
@@ -93,11 +95,12 @@ const shared = sidebar.filter((entry) => !HOSTS.some((host) => host === sectionO
 		background: var(--sl-color-gray-6);
 		border: 1px solid var(--sl-color-gray-5);
 		border-radius: 10px;
-		margin-bottom: 1.25rem;
 	}
 	.host-switcher button {
 		flex: 1;
-		padding: 0.4em 0.5rem;
+		display: flex;
+		justify-content: center;
+		padding: 0.6rem 0.5rem;
 		border: 0;
 		border-radius: 7px;
 		background: none;
@@ -110,6 +113,14 @@ const shared = sidebar.filter((entry) => !HOSTS.some((host) => host === sectionO
 	.host-switcher button:hover {
 		color: var(--sl-color-white);
 	}
+	/* Same logo size as the home page cards: Font Awesome 7 icons get scaled to fill their padded box. */
+	.host-switcher :global(svg) {
+		width: 1.25rem;
+		height: 1.25rem;
+	}
+	.host-switcher :global(svg[data-icon^='fa7']) {
+		scale: 1.25;
+	}
 	:global(html[data-host='unreal']) [data-host-button='unreal'],
 	:global(html[data-host='maya']) [data-host-button='maya'] {
 		background-color: var(--sl-color-black);
@@ -118,7 +129,8 @@ const shared = sidebar.filter((entry) => !HOSTS.some((host) => host === sectionO
 	}
 
 	.thanks {
-		margin-top: 2rem;
+		/* The sidebar is a full-height flex column, so this pins the line to its bottom. */
+		margin-top: auto;
 		/* Line up with the sidebar items' text; Starlight's item padding is 0.5rem, scoped to its lists. */
 		padding-inline-start: 0.5rem;
 		font-size: 0.8rem;
