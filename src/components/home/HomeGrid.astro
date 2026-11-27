@@ -1,14 +1,14 @@
 ---
-// A titled grid of home cards.
+// A grid of home cards, with an optional heading.
 interface Props {
-	title: string;
-	columns: 2 | 3;
+	title?: string;
+	columns: 1 | 2 | 3;
 }
 const { title, columns } = Astro.props;
 ---
 
 <section class="not-content">
-	<h2>{title}</h2>
+	{title && <h2>{title}</h2>}
 	<div class="grid" style={`--columns: ${columns}`}><slot /></div>
 </section>
 

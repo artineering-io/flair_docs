@@ -1,0 +1,28 @@
+---
+title: Flair for Unreal Engine
+description: The comprehensive and human-made documentation to using Flair for Unreal Engine.
+sidebar:
+  label: Overview
+---
+
+import HomeGrid from '../../../components/home/HomeGrid.astro';
+import HomeCard from '../../../components/home/HomeCard.astro';
+
+The comprehensive and human-written documentation to using Flair for Unreal Engine!
+
+<HomeGrid columns={1}>
+	<HomeCard href="/unreal/installation/" icon="fa7-solid:download" title="Installation">
+		Get flairing as soon as possible with this setup guide.
+	</HomeCard>
+</HomeGrid>
+
+<HomeGrid columns={2}>
+	<HomeCard href="/unreal/artist-guide/" icon="fa7-solid:palette" chip="Pixel Magic" title="Artist Guide"
+		items={['Getting Started', 'Create Style Actors', 'Art-direction Tools', 'Tips and Best Practices', 'And more']}>
+		Stylize your levels with Flair Style Actors and art-direct the style with all available tools.
+	</HomeCard>
+	<HomeCard href="/unreal/technical-artist-guide/" icon="fa7-solid:diagram-project" chip="Pixel Alchemy" title="Technical Artist Guide"
+		items={['Mix-and-Match Effect Layers', 'Create Effect Layers', 'Custom Render Passes', 'Custom Flair PPMs', 'And more']}>
+		Brew your own Flair styles with Effect Layers, Render Passes and Post-Process Materials (PPMs).
+	</HomeCard>
+</HomeGrid>
