@@ -104,7 +104,8 @@ starlight-toc a[aria-current='true'] {
 main {
 	display: flex;
 	flex-direction: column;
-	min-height: calc(100vh - var(--sl-nav-height));
+	/* The window minus the header and, on narrower windows, the "On this page" bar above the content. */
+	min-height: calc(100vh - var(--sl-nav-height) - var(--sl-mobile-toc-height));
 	/* Starlight pads the bottom by 3vh through this variable; the panel below sets the spacing instead. */
 	--sl-main-pad: 0;
 }
