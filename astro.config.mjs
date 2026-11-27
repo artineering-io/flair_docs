@@ -82,6 +82,7 @@ export default defineConfig({
 		starlight({
 			title: 'Flair',
 			logo: { src: './src/assets/flair-logo.png', alt: '' },
+			favicon: '/favicon.png',
 			customCss: [
 				'@fontsource/lato/400.css',
 				'@fontsource/lato/400-italic.css',
