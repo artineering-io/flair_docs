@@ -1,15 +1,19 @@
 ---
-// A linked card with an optional chip and an optional list of what's inside.
+// A linked card with an optional icon, chip and list of what's inside.
+import { Icon } from 'astro-icon/components';
+
 interface Props {
 	href: string;
 	title: string;
+	icon?: string;
 	chip?: string;
 	items?: string[];
 }
-const { href, title, chip, items } = Astro.props;
+const { href, title, icon, chip, items } = Astro.props;
 ---
 
 <a class="card" href={href}>
+	{icon && <Icon name={icon} class="icon" aria-hidden="true" />}
 	{chip && <span class="chip">{chip}</span>}
 	<h3>{title}</h3>
 	<div class="text"><slot /></div>
@@ -18,6 +22,7 @@ const { href, title, chip, items } = Astro.props;
 
 <style>
 	.card {
+		position: relative;
 		display: block;
 		padding: 1.25rem 1.4rem;
 		border: 1px solid var(--sl-color-gray-5);
@@ -32,6 +37,23 @@ const { href, title, chip, items } = Astro.props;
 	.card:hover {
 		border-color: var(--sl-color-text-accent);
 		transform: translateY(-2px);
+	}
+	/* Logo in the top-right corner, lit up with the border on hover. */
+	.icon {
+		position: absolute;
+		top: 1.25rem;
+		right: 1.4rem;
+		width: 2rem;
+		height: 2rem;
+		color: var(--sl-color-gray-3);
+		transition: color 0.15s;
+	}
+	.card:hover .icon {
+		color: var(--sl-color-text-accent);
+	}
+	/* Font Awesome 7 icons sit in a padded box (512 of 640 units); scale them to fill it like Simple Icons do. */
+	.icon[data-icon^='fa7'] {
+		scale: 1.25;
 	}
 	.chip {
 		display: inline-block;
