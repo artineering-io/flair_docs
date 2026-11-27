@@ -11,7 +11,7 @@ sidebar:
 | --- | --- | --- | --- |
 | Windows | 11 | 8 GB | 16 GB |
 | Linux | Rocky 9+ (RHEL 9), Unreal Engine 5.8+ | 8 GB | 16 GB |
-| macOS | (coming soon) | n/a | 24 GB |
+| macOS | MacOS 15+ | n/a | 24 GB |
 
 ## Installation
 
