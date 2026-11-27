@@ -20,6 +20,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
+        # Full history, so each page's "Last updated" date comes from its own last commit.
+        with:
+          fetch-depth: 0
 
       # Media lives in Git LFS, whose bandwidth quota is shared with flair_ue_sandbox. Caching
       # .git/lfs keyed on the list of LFS objects means a deploy only downloads media that changed.

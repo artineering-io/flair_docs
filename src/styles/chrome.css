@@ -99,6 +99,40 @@ starlight-toc a[aria-current='true'] {
 	}
 }
 
+/* Short pages: stretch the content down to the window's bottom so "Last updated" sits there,
+   instead of right under the last paragraph. Long pages are unaffected. */
+main {
+	display: flex;
+	flex-direction: column;
+	min-height: calc(100vh - var(--sl-nav-height));
+	/* Starlight pads the bottom by 3vh through this variable; the panel below sets the spacing instead. */
+	--sl-main-pad: 0;
+}
+main > .content-panel:last-child {
+	flex-grow: 1;
+	display: flex;
+	flex-direction: column;
+	/* Lines "Last updated" up with "Thanks for using Flair", which the sidebar keeps its 1rem gap
+	   plus a 1px spacer above the bottom edge. */
+	padding-bottom: calc(1rem + 1px);
+}
+main > .content-panel:last-child > .sl-container {
+	flex-grow: 1;
+	display: flex;
+	flex-direction: column;
+	/* A flex item with auto side margins shrinks to its content; keep it full width. */
+	width: 100%;
+}
+main > .content-panel:last-child footer {
+	margin-top: auto;
+	/* Starlight's gap only spaces the prev/next links, which are turned off. */
+	gap: 0;
+}
+/* "Last updated" is metadata, like "Thanks for using Flair", so it gets the same size. */
+main > .content-panel:last-child footer .meta {
+	font-size: 0.8rem;
+}
+
 /* Pagefind's filter panel, hidden: the sidebar host switcher sets the filter instead. */
 #starlight__search .pagefind-ui__filter-panel {
 	display: none;

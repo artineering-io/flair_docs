@@ -91,6 +91,7 @@ export default defineConfig({
 				'./src/styles/content.css',
 			],
 			pagination: false,
+			lastUpdated: true,
 			head: [
 				{ tag: 'script', attrs: { src: '/scripts/ui-screenshots.js', defer: true } },
 				{ tag: 'script', attrs: { src: '/scripts/before-after.js', defer: true } },
